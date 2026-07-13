@@ -8,96 +8,86 @@ get_header();
 while ( have_posts() ) :
 the_post();
 ?>
+
 <!-- Banner -->
 <section class="page-banner">
 
-<img src="<?php the_field('banner_image'); ?>">
+    <?php
+    $banner = get_field('banner_image');
+    if($banner):
+    ?>
+        <img src="<?php echo esc_url($banner); ?>" alt="<?php the_title(); ?>">
+    <?php endif; ?>
 
-<h1><?php the_title(); ?></h1>
+    <div class="banner-overlay">
+        <div class="container">
+            <h1><?php the_title(); ?></h1>
+        </div>
+    </div>
 
 </section>
-
-<section>
-
-<?php the_content(); ?>
-
-</section>
-
-<?php get_footer(); ?>
 
 
 <!-- About -->
+
 <section class="page-content">
 
-<div class="container content-grid"> 
+    <div class="container content-grid">
 
-<div class="page-image">
+        <div class="page-image">
 
-<?php
+            <?php
+            $about = get_field('about_image');
 
-if(has_post_thumbnail()){
+            if($about):
+            ?>
 
-the_post_thumbnail('large');
+            <img src="<?php echo esc_url($about); ?>" alt="About">
 
-}
+            <?php endif; ?>
 
-?>
+        </div>
 
-</div>
+        <div class="page-text">
 
-<div class="page-text">
+            <span class="small-title">
 
-<p class="small-title">
+                ABOUT US
 
-WHO WE ARE
+            </span>
 
-</p>
+            <h2>
 
-<h2> 
+                <?php the_field('about_title'); ?>
 
-We Are Passionate About Building Solutions
+            </h2>
 
-</h2>
+            <?php the_field('about_description'); ?>
 
-<?php the_content(); ?>
+        </div>
 
-<div class="mission-grid">
+    </div>
 
-<div class="mission-box">
+</section>
 
-<h3>
 
-Our Mission
+<!-- Services -->
 
-</h3>
+<section class="services">
 
-<p>
+<div class="container">
 
-Our mission is to empower businesses with
-innovative digital solutions.
+<div class="section-title">
 
-</p>
+<p>OUR SERVICES</p>
 
-</div>
-
-<div class="mission-box">
-
-<h3>
-
-Our Vision
-
-</h3>
-
-<p>
-
-Our vision is to become a trusted technology
-partner around the world.
-
-</p>
+<h2>What We Do</h2>
 
 </div>
 
-</div>
+<div class="service-content">
+
+<?php the_field('our_services'); ?>
 
 </div>
 
@@ -106,9 +96,7 @@ partner around the world.
 </section>
 
 <?php
-
 endwhile;
 
 get_footer();
-
 ?>
